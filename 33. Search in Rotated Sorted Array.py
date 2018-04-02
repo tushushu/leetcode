@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # -*- coding: utf-8 -*-
 """
 Created on Sun Feb 11 18:44:48 2018
@@ -24,3 +25,31 @@ class Solution:
             else:
                 break
         return -1
+=======
+# -*- coding: utf-8 -*-
+"""
+Created on Sun Feb 11 18:44:48 2018
+
+@author: Administrator
+"""
+
+class Solution:
+    def search(self, nums, target):
+        low = 0
+        high = len(nums) - 1
+        while low <= high:
+            mid = (low + high) // 2
+            if nums[mid] == target:
+                return mid
+            elif nums[low] <= target < nums[mid]:
+                high = mid - 1
+            elif nums[mid] < target <= nums[high]:
+                low = mid + 1
+            elif nums[low] > nums[mid]:
+                high = mid - 1
+            elif nums[mid] > nums[high]:
+                low = mid + 1
+            else:
+                break
+        return -1
+>>>>>>> c9978dc9fcf21f5c72e7576e1b249d22946c4f1e
