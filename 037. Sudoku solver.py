@@ -3,7 +3,7 @@
 """
 Created on Sat Jun  2 12:21:44 2018
 
-@author: Tuzi
+@author: tushushu
 """
 from itertools import product, combinations, chain
 from copy import deepcopy
