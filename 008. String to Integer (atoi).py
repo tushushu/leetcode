@@ -15,7 +15,7 @@ class Solution:
         """
         INT_MAX = 2147483647
         INT_MIN = -2147483648
-        p = re.compile("^\s*(\+?|-?)\d+")
+        p = re.compile(r"^\s*(\+?|-?)\d+")
         try:
             res = int(p.match(str).group().replace(' ', ''))
         except:
