@@ -24,14 +24,3 @@ class Solution:
         if n < 4:
             return n
         return int(sum(self.helper(n - i, i) for i in range(n // 2 + 1)))
-
-
-def main():
-    t = Solution()
-    # for i in range(10):
-    #     print(t.climbStairs(i))
-    print(t.climbStairs(45))
-
-
-if __name__ == '__main__':
-    main()
