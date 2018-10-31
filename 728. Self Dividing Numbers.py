@@ -23,4 +23,4 @@ class Solution:
         :type right: int
         :rtype: List[int]
         """
-        return list(filter(lambda x: self.helper(x), range(left, right + 1)))
+        return list(filter(self.helper, range(left, right + 1)))
