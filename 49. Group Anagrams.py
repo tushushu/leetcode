@@ -7,33 +7,25 @@
 """
 from collections import Counter
 
+CHARACTERS = "abcdefghijklmnopqrstuvwxyz"
+
 
 class Solution(object):
-    def cmp(self, a, b):
-        if len(a) != len(b):
-            return False
-        else:
-            return all(v == b[k] for k, v in a.items())
-
     def groupAnagrams(self, strs):
         """
         :type strs: List[str]
         :rtype: List[List[str]]
         """
-        patterns = []
-        ret = []
+        ret = dict()
         for s in strs:
-            p = Counter(s)
-            flag = 0
-            for i, pattern in enumerate(patterns):
-                if self.cmp(p, pattern):
-                    ret[i].append(s)
-                    flag = 1
-                    break
-            if flag == 0:
-                patterns.append(p)
-                ret.append([s])
-        return ret
+            cnt = Counter(s)
+            pattern = ''.join(c + str(cnt[c]) for c in CHARACTERS if c in cnt)
+            # pattern = ''.join(x[0] + str(x[1]) for x in sorted(cnt.items(), key=lambda x:x[0]))
+            if pattern in ret:
+                ret[pattern].append(s)
+            else:
+                ret[pattern] = [s]
+        return [x for x in ret.values()]
 
 
 if __name__ == "__main__":
