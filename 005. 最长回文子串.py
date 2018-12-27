@@ -16,7 +16,6 @@ class Solution:
         ret = ""
         n = len(s)
         for i in range(n):
-            print("a", length, ret)
             # 奇数
             j = 1
             while i - j >= 0 and i + j < n:
