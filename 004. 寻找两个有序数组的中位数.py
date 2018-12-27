@@ -13,12 +13,12 @@ class Solution:
         """
         m = len(nums1)
         n = len(nums2)
-        if m < n:
+        if m > n:
             nums1, nums2 = nums2, nums1
             m, n = n, m
-        high = (m + n) // 2 - 1
-        tot = high - 1
-        low = tot - n + 1
+        tot = (m + n) // 2 - 2
+        low = -1
+        high = m
         while 1:
             i = (low + high) // 2
             j = tot - i
