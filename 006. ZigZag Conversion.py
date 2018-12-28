@@ -1,37 +1,46 @@
 # -*- coding: utf-8 -*-
 """
-Created on Tue Jan  9 12:59:59 2018
-
-@author: Administrator
+@Author: tushushu
+@Date: 2018-12-28 10:13:29
 """
+
+from operator import itemgetter
 
 
 class Solution:
-    def next(self, i, numRows, direction):
-        if numRows == 1:
-            pass
-        else:
-            i = i + direction
-            if i == -1 or i == numRows:
-                direction = -direction
-                i += direction * 2
-        return i, direction
-
     def convert(self, s, numRows):
-        res = [[] for _ in range(numRows)]
-        i = 0
-        direction = 1
-        for char in s:
-            res[i].append(char)
-            i, direction = self.next(i, numRows, direction)
-        return ''.join([''.join(x) for x in res])
-
-    def convert1(self, s, numRows):
-        step = (numRows == 1) - 1  # 0 or -1
-        rows, idx = [''] * numRows, 0
+        """
+        :type s: str
+        :type numRows: int
+        :rtype: str
+        """
+        if numRows == 1 or s == "":
+            return s
+        ret = []
+        i = j = 0
+        down = True
         for c in s:
-            rows[idx] += c
-            if idx == 0 or idx == numRows-1:
-                step = -step  # change direction
-            idx += step
-        return ''.join(rows)
+            ret.append((i, j, c))
+            if down:
+                if j < numRows - 1:
+                    j += 1
+                else:
+                    down = False
+                    j -= 1
+                    i += 1
+            else:
+                if j > 0:
+                    j -= 1
+                    i += 1
+                else:
+                    down = True
+                    j += 1
+        ret.sort(key=itemgetter(1, 0))
+        return "".join(map(lambda x: x[2], ret))
+
+
+if __name__ == "__main__":
+    t = Solution()
+    s = "LEETCODEISHIRING"
+    numRows = 3
+    print(t.convert(s, numRows))
