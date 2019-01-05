@@ -13,8 +13,6 @@ class Solution:
         """
         if x < 0:
             return False
-        if x < 10:
-            return True
         nums = []
         while x != 0:
             x, num = divmod(x, 10)
