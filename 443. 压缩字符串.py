@@ -29,7 +29,6 @@ class Solution:
                     j = 1
         if j > 1:
             chars.extend(list(str(j)))
-        print(chars)
 
 
 if __name__ == "__main__":
