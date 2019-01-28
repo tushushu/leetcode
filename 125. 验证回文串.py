@@ -3,6 +3,10 @@
 @Author: tushushu
 @Date: 2019-01-16 12:01:12
 """
+from itertools import chain
+
+CHAR = set(map(chr, chain(range(65, 65 + 26),
+                          range(97, 97 + 26), range(48, 48 + 10))))
 
 
 class Solution:
@@ -14,9 +18,9 @@ class Solution:
         p = 0
         q = len(s) - 1
         while 1:
-            while p <= q and not s[p].isalpha():
+            while p <= q and s[p] not in CHAR:
                 p += 1
-            while p <= q and not s[q].isalpha():
+            while p <= q and s[q] not in CHAR:
                 q -= 1
             if p > q:
                 return True
