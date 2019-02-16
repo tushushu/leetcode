@@ -1,13 +1,11 @@
 # -*- coding: utf-8 -*-
 """
 @Author: tushushu
-@Date: 2018-11-26 18:31:47
-@Last Modified by:   tushushu
-@Last Modified time: 2018-11-26 18:31:47
+@Date: 2019-02-16 14:58:47
 """
 
 
-class Solution(object):
+class Solution:
     def containsDuplicate(self, nums):
         """
         :type nums: List[int]
