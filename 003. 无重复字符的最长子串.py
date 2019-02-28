@@ -15,10 +15,13 @@ class Solution:
         dic = {}
         ret = 0
         start = 0
+        n = len(s)
         for end, c in enumerate(s):
             if c in dic and dic[c] >= start:
                 ret = max(ret, end - start)
                 start = dic[c] + 1
+                if n - start < ret:
+                    break
             dic[c] = end
         return max(ret, end - start + 1)
 
