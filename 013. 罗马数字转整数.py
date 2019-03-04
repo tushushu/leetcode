@@ -6,21 +6,19 @@ Created on Fri Jan 12 16:47:58 2018
 """
 
 
-DIC = {'I': 1, 'V': 5, 'X': 10, 'L': 50, 'C': 100, 'D': 500, 'M': 1000}
+STR2INT = {'I': 1, 'V': 5, 'X': 10, 'L': 50, 'C': 100, 'D': 500, 'M': 1000}
+RULE = {'I': {'V', 'X'}, 'X': {'L', 'C'}, 'C': {'D', 'M'}}
 
 
 class Solution:
     def romanToInt(self, s):
         ite = iter(s[::-1])
         a = next(ite)
-        ret = DIC[a]
+        ret = STR2INT[a]
         for b in ite:
-            c1 = b is 'I' and a in ('V', 'X')
-            c2 = b is 'X' and a in ('L', 'C')
-            c3 = b is 'C' and a in ('D', 'M')
-            if c1 or c2 or c3:
-                ret -= DIC[b]
+            if RULE.get(b) and a in RULE[b]:
+                ret -= STR2INT[b]
             else:
-                ret += DIC[b]
+                ret += STR2INT[b]
             a = b
         return ret
