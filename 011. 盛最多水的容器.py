@@ -11,12 +11,10 @@ class Solution:
         :type height: List[int]
         :rtype: int
         """
-        p = 0
+        p = ret = 0
         q = len(height) - 1
-        ret = 0
-        while p != q:
-            area = min(height[p], height[q]) * (q - p)
-            ret = max(ret, area)
+        while p is not q:
+            ret = max(ret, min(height[p], height[q]) * (q - p))
             if height[p] < height[q]:
                 p += 1
             else:
