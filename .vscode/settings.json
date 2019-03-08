@@ -1,0 +1,11 @@
+{
+    "python.linting.pylintEnabled": false,
+    "python.linting.flake8Enabled": true,
+    "python.linting.flake8Args": [
+        "--ignore=E402"
+    ],
+    "fileheader.Author": "tushushu",
+    "fileheader.LastModifiedBy": "tushushu",
+    "fileheader.tpl": "# -*- coding: utf-8 -*-\r\n\"\"\"\r\n@Author: {author}\r\n@Date: {createTime}\r\n\"\"\"\r\n",
+    "editor.formatOnSave": true
+}
