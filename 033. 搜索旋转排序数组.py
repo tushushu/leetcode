@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 """
-Created on Sun Feb 11 18:44:48 2018
-
-@author: Administrator
+@Author: tushushu
+@Date: 2019-03-13 15:37:36
 """
+
 
 class Solution:
     def search(self, nums, target):
@@ -17,7 +17,7 @@ class Solution:
                 high = mid - 1
             elif nums[mid] < target <= nums[high]:
                 low = mid + 1
-            elif nums[low] > nums[mid]:
+            elif nums[mid] < nums[low]:
                 high = mid - 1
             elif nums[mid] > nums[high]:
                 low = mid + 1
