@@ -23,17 +23,20 @@ class Solution:
         m = len(needle)
         i = j = 0
         while i < n and j < m:
-            if haystack[i] is needle[j]:
+            if j is -1 or haystack[i] is needle[j]:
                 i += 1
                 j += 1
-            elif j is not 0:
-                j = next_arr[j - 1]
             else:
-                i += 1
+                j = next_arr[j]
         return i - j if j is m else -1
 
     def gen_next_arr(self, needle: str)->list:
-        """用临时数组存储匹配失败后，下一次匹配时needle的下标
+        """
+        假设haystack的下标为i，needle的下标为j
+        如果匹配(haystack[i] != needle[j])
+        i不动，
+        如果j之前的k个字符跟needle的前k个字符相同
+        j就可以从k开始，而不是从0开始
 
         Arguments:
             needle {str} -- 待查找的子串
@@ -41,19 +44,22 @@ class Solution:
         Returns:
             list
         """
-
-        i = 0
+        # 初始化一个长度与needle的列表，初始值为0
         m = len(needle)
-        next_arr = [0 for _ in range(m)]
-        j = 1
-        while j < m:
-            if needle[j] is needle[i]:
-                next_arr[j] = i + 1
+        # next_arr的元素表示子串公共前缀的最大长度
+        next_arr = [0 if i else -1 for i, _ in enumerate(range(m))]
+        # 初始化，i在列表的第-1位，j在第0位
+        i = -1
+        j = 0
+        while j < m - 1:
+            # i和j位置的元素相同
+            if i is -1 or needle[i] is needle[j]:
+                # 各前进一步
                 i += 1
                 j += 1
-            elif i is not 0:
-                i = next_arr[i - 1]
+                # 记录当前位置公共前缀的最大值
+                next_arr[j] = i
+            # i和j位置的元素不同，i后退到上一个不重复的字符
             else:
-                next_arr[j] = 0
-                j += 1
+                i = next_arr[i]
         return next_arr
