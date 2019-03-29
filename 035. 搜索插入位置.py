@@ -1,18 +1,12 @@
 # -*- coding: utf-8 -*-
 """
 @Author: tushushu
-@Date: 2019-02-19 17:00:45
+@Date: 2019-03-29 15:17:09
 """
 
 
 class Solution:
     def searchInsert(self, nums, target):
-        """
-        :type nums: List[int]
-        :type target: int
-        :rtype: int
-        """
-
         n = len(nums) - 1
         if target <= nums[0]:
             return 0
@@ -22,16 +16,19 @@ class Solution:
         high = n
         while 1:
             mid = (low + high) // 2
-            if nums[mid - 1] < target <= nums[mid]:
-                return mid
-            elif nums[mid] > target:
-                high = mid - 1
-            else:
+            if nums[mid] > target:
+                if nums[mid - 1] < target:
+                    return mid
+                elif nums[mid - 1] == target:
+                    return mid - 1
+                else:
+                    high = mid - 1
+            elif nums[mid] < target:
                 low = mid + 1
+            else:
+                return mid
 
 
 if __name__ == "__main__":
     t = Solution()
-    nums = [1, 3, 5, 6]
-    target = 2
-    print(t.searchInsert(nums, target))
+    print(t.searchInsert([1, 3], 2))
