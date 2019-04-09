@@ -7,5 +7,8 @@
     "fileheader.Author": "tushushu",
     "fileheader.LastModifiedBy": "tushushu",
     "fileheader.tpl": "# -*- coding: utf-8 -*-\r\n\"\"\"\r\n@Author: {author}\r\n@Date: {createTime}\r\n\"\"\"\r\n",
-    "editor.formatOnSave": true
+    "editor.formatOnSave": true,
+    "files.associations": {
+        "iostream": "cpp"
+    }
 }
