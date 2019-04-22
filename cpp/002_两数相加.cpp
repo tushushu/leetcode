@@ -11,33 +11,29 @@ struct ListNode
 class Solution
 {
 public:
-  int getNumber(ListNode *l)
-  {
-    ListNode *head = l;
-    int ret = 0, n = 1;
-    while (head != NULL)
-    {
-      ret += head->val * n;
-      head = head->next;
-      n *= 10;
-    }
-
-    return ret;
-  };
-
   ListNode *addTwoNumbers(ListNode *l1, ListNode *l2)
   {
-    int num = this->getNumber(l1) + this->getNumber(l2);
-
     ListNode *ret = new ListNode(0);
     ListNode *head = ret;
-    int k;
-    while (num != 0)
+    int num, tmp = 0;
+    while (l1 != NULL || l2 != NULL)
     {
-      k = num % 10;
-      num = num / 10;
-      head->next = new ListNode(k);
+      num = tmp + (l1 != NULL ? l1->val : 0) + (l2 != NULL ? l2->val : 0);
+      tmp = num / 10;
+      head->next = new ListNode(num % 10);
       head = head->next;
+      if (l1 != NULL)
+      {
+        l1 = l1->next;
+      }
+      if (l2 != NULL)
+      {
+        l2 = l2->next;
+      }
+    }
+    if (tmp)
+    {
+      head->next = new ListNode(tmp);
     }
     return ret->next;
   }
