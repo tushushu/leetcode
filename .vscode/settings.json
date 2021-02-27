@@ -13,5 +13,6 @@
     "editor.formatOnSave": true,
     "files.associations": {
         "iostream": "cpp"
-    }
+    },
+    "python.pythonPath": "/Users/tienan.liu/opt/miniconda3/envs/bflat/bin/python"
 }
