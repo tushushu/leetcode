@@ -1,70 +1,37 @@
 # -*- coding: utf-8 -*-
 """
 @Author: tushushu
-@Date: 2018-12-27 21:05:58
+@Date: 2021-05-05 16:13:24
+@Last Modified by:   tushushu
+@Last Modified time: 2021-05-05 16:13:24
 """
 
 
 class Solution:
-    def longestPalindrome(self, s):
+    def longestPalindrome(self, s: str) -> str:
         """
-        :type s: str
-        :rtype: str
+        i: left
+        j: right
+        F(i, j) = F(i + 1, j - 1) AND s[i] == s[j]
+        But it's hard to update, when using for loop i(for loop j).
+
+        Another form,
+        l: length
+        i: index
+        F(i, l) = F(i + 1, l - 2) AND s[i] == s[i + l - 1]
         """
-
-        length = -float("inf")
-        mid = 0
-        width = 0
-        is_odd = True
-        n = len(s)
-        for i in range(n):
-            # 奇数
-            # 提前终止
-            max_len = min(n - 1 - i, i) * 2 + 1
-            if max_len > length:
-                j = 1
-                while i - j >= 0 and i + j < n:
-                    if s[i - j] != s[i + j]:
-                        break
-                    j += 1
-                new_len = (j - 1) * 2 + 1
-                if new_len >= length:
-                    length = new_len
-                    mid = i
-                    width = j
-                    is_odd = True
-
-            # 偶数
-            # 提前终止
-            j = 0
-            max_len = min(n - i, i + 1) * 2
-            if max_len > length:
-                while i - j >= 0 and i + j + 1 < n:
-                    if s[i - j] != s[i + j + 1]:
-                        break
-                    j += 1
-                new_len = j * 2
-                if new_len >= length:
-                    length = new_len
-                    mid = i
-                    width = j
-                    is_odd = False
-        if is_odd:
-            ret = s[mid - width + 1: mid + width]
-        else:
-            ret = s[mid - width + 1: mid + width + 1]
-        return ret
-
-
-if __name__ == "__main__":
-    t = Solution()
-    # s = ""
-    # print(t.longestPalindrome(s))
-    # s = "a"
-    # print(t.longestPalindrome(s))
-    # s = "ab"
-    # print(t.longestPalindrome(s))
-    # s = "abba"
-    # print(t.longestPalindrome(s))
-    s = "ccc"
-    print(t.longestPalindrome(s))
+        if len(s) < 2:
+            return s
+        dp = [[True if l == 0 else False] * len(s) for l in range(len(s) + 1)]
+        start, end = 0, 1
+        max_len = 0
+        for l in range(1, len(s) + 1):
+            for i in range(len(s) - l + 1):
+                if l < 2:
+                    dp[l][i] = True
+                else:
+                    dp[l][i] = dp[l - 2][i + 1] and s[i] == s[i + l - 1]
+                if dp[l][i] and l > max_len:
+                    start, end = i, i + l
+                    max_len = l
+        return s[start:end]
